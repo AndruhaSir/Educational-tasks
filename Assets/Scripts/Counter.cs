@@ -15,16 +15,16 @@ public class Counter : MonoBehaviour
     private Coroutine _counterCoroutine;
     private bool _isRunning = false;
 
-    public event Action<int> OnScoreChanged;
+    public event Action<int> ScoreChanged;
 
     private void OnEnable()
     {
-        _inputReader.OnPressButton += ToggleCounter;
+        _inputReader.ButtonPressed += ToggleCounter;
     }
 
     private void OnDisable()
     {
-        _inputReader.OnPressButton -= ToggleCounter;   // ← отписка
+        _inputReader.ButtonPressed -= ToggleCounter;
     }
 
     private void ToggleCounter()
@@ -41,6 +41,11 @@ public class Counter : MonoBehaviour
 
     private void StartCounterCoroutine()
     {
+        if (_counterCoroutine != null)
+        {
+            return;
+        }
+
         _isRunning = true;
         _counterCoroutine = StartCoroutine(StartCounter());
     }
@@ -63,7 +68,7 @@ public class Counter : MonoBehaviour
         while (true)
         {
             _currentScore += _amountIncrease;
-            OnScoreChanged?.Invoke(_currentScore);
+            ScoreChanged?.Invoke(_currentScore);
 
             yield return wait;
         }

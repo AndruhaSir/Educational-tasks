@@ -7,7 +7,7 @@ public class InputReader : MonoBehaviour
 {
     private ButtonControl _observedKey;
 
-    public event Action OnPressButton;
+    public event Action ButtonPressed;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class InputReader : MonoBehaviour
     {
         if (_observedKey.wasPressedThisFrame)
         {
-            OnPressButton?.Invoke();
+            ButtonPressed?.Invoke();
         }
     }
 }

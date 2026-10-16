@@ -14,12 +14,12 @@ public class CounterView : MonoBehaviour
 
     private void OnEnable()
     {
-        _counter.OnScoreChanged += ChangeScoreText;
+        _counter.ScoreChanged += ChangeScoreText;
     }
 
     private void OnDisable()
     {
-        _counter.OnScoreChanged -= ChangeScoreText;
+        _counter.ScoreChanged -= ChangeScoreText;
     }
 
     private void ChangeScoreText(int value)
