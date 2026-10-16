@@ -1,33 +1,30 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class Counter : MonoBehaviour
 {
     [SerializeField] private float _delay = 0.5f;
+    [SerializeField] private InputReader _inputReader;
 
     private int _currentScore = 0;
     private int _amountIncrease = 1;
-    private TextMeshProUGUI _textMeshPro;
-    private ButtonControl _keyToStartCounter;
+    
     private Coroutine _counterCoroutine;
     private bool _isRunning = false;
 
-    private void Start()
+    public event Action<int> OnScoreChanged;
+
+    private void OnEnable()
     {
-        _textMeshPro = GetComponent<TextMeshProUGUI>();
-        _keyToStartCounter = Mouse.current.leftButton;
+        _inputReader.OnPressButton += ToggleCounter;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        if (_keyToStartCounter.wasPressedThisFrame)
-        {
-            ToggleCounter();
-        }
+        _inputReader.OnPressButton -= ToggleCounter;   // ← отписка
     }
 
     private void ToggleCounter()
@@ -65,8 +62,8 @@ public class Counter : MonoBehaviour
 
         while (true)
         {
-            _textMeshPro.text = _currentScore.ToString();
             _currentScore += _amountIncrease;
+            OnScoreChanged?.Invoke(_currentScore);
 
             yield return wait;
         }
