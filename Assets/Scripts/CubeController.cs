@@ -11,6 +11,8 @@ public class CubeController : MonoBehaviour
     [SerializeField, Min(0f)] private float _explosionForce = 5f;
     [SerializeField, Min(0.1f)] private float _explosionRadius = 3f;
 
+    private float _maxChancePrecent = 100f;
+
     private bool _isProcessed;
 
     public void OnClick()
@@ -20,7 +22,7 @@ public class CubeController : MonoBehaviour
 
         _isProcessed = true;
 
-        if (Random.Range(0f, 100f + 1f) >= _splitChance)
+        if (Random.Range(0f, _maxChancePrecent + 1f) >= _splitChance)
         {
             Destroy(gameObject);
             return;
