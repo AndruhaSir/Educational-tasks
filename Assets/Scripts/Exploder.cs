@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    [SerializeField, Min(0f)] private float _explosionForce = 5f;
-    [SerializeField, Min(0.1f)] private float _explosionRadius = 3f;
 
-    public void Explode(Vector3 position)
+    public void Explode(Vector3 position, float explosionForce, float explosionRadius)
     {
-        Collider[] colliders = Physics.OverlapSphere(position, _explosionRadius);
+        Collider[] colliders = Physics.OverlapSphere(position, explosionRadius);
         HashSet<Rigidbody> rigidbodies = new HashSet<Rigidbody>();
 
         foreach (Collider collider in colliders)
@@ -20,27 +18,7 @@ public class Exploder : MonoBehaviour
                 continue;
             }
 
-            rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius, 0f, ForceMode.Impulse);
-        }
-    }
-
-    public void Explode(Vector3 position, List<GameObject> gameObjects)
-    {
-        foreach (GameObject gameObject in gameObjects)
-        {
-            if (gameObject == null)
-            {
-                continue;
-            }
-
-            Rigidbody rigidbodyComponent = gameObject.GetComponent<Rigidbody>();
-
-            if (rigidbodyComponent == null || rigidbodyComponent.isKinematic)
-            {
-                continue;
-            }
-
-            rigidbodyComponent.AddExplosionForce(_explosionForce, position, _explosionRadius, 0f, ForceMode.Impulse);
+            rigidbody.AddExplosionForce(explosionForce, position, explosionRadius, 0f, ForceMode.Impulse);
         }
     }
 }

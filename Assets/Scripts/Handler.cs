@@ -51,6 +51,8 @@ public class Handler : MonoBehaviour
         Vector3 origin = cube.transform.position;
         Vector3 childScale = cube.transform.localScale * 0.5f;
         float childChance = cube.SplitChance * 0.5f;
+        float childExplotionForce = cube.ExplotionForce * 2f;
+        float childExplotionRadius = cube.ExplotionRadius * 2f;
 
         int minCount = Mathf.Min(_minSplitCount, _maxSplitCount);
         int maxCount = Mathf.Max(_minSplitCount, _maxSplitCount);
@@ -60,12 +62,12 @@ public class Handler : MonoBehaviour
 
         for (int index = 0; index < count; index++)
         {
-            Cube spawnedCube = _spawner.SpawnCube(origin + Random.insideUnitSphere * 0.15f, childScale, childChance);
+            Cube spawnedCube = _spawner.SpawnCube(origin + Random.insideUnitSphere * 0.15f, childScale, childChance, childExplotionForce, childExplotionRadius);
 
             spawnedCubes.Add(spawnedCube.gameObject);
         }
 
-        _exploder.Explode(origin, spawnedCubes);
+        _exploder.Explode(origin, childExplotionForce, childExplotionRadius);
         _spawner.DestroyCube(cube.gameObject);
     }
 }
