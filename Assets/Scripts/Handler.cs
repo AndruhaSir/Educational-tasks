@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class Handler : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class Handler : MonoBehaviour
 
         if (splitChance <= 0f || (splitChance < 100f && Random.Range(0f, 100f) >= splitChance))
         {
+            _exploder.Explode(cube.transform.position, cube.ExplotionForce, cube.ExplotionRadius);
+
             _spawner.DestroyCube(cube.gameObject);
             return;
         }
@@ -67,7 +70,6 @@ public class Handler : MonoBehaviour
             spawnedCubes.Add(spawnedCube.gameObject);
         }
 
-        _exploder.Explode(origin, childExplotionForce, childExplotionRadius);
         _spawner.DestroyCube(cube.gameObject);
     }
 }
