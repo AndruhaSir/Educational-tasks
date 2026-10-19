@@ -11,22 +11,21 @@ public class Spawner : MonoBehaviour
 
         cube.transform.localScale = scale;
         cube.Initialize(splitChance);
-
-        if (_colorChanger != null)
-        {
-            _colorChanger.ChangeColor(cube.gameObject);
-        }
+        _colorChanger.ChangeColor(cube.Renderer);
 
         return cube;
     }
 
     public void DestroyCube(GameObject gameObject)
     {
-        if (gameObject == null)
-        {
-            return;
-        }
-
         Destroy(gameObject);
+    }
+
+    private void OnValidate()
+    {
+        if (_cubePrefab == null || _colorChanger == null)
+        {
+            Debug.LogError("Не все компоненты назначены", this);
+        }
     }
 }

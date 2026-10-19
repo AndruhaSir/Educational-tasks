@@ -2,18 +2,8 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
-    public void ChangeColor(GameObject gameObject)
+    public void ChangeColor(Renderer renderer)
     {
-        if (gameObject == null)
-        {
-            return;
-        }
-
-        Renderer gameObjectRenderer = gameObject.GetComponent<Renderer>();
-
-        if (gameObjectRenderer != null)
-        {
-            gameObjectRenderer.material.color = Random.ColorHSV();
-        }
+        renderer.material.color = Random.ColorHSV();
     }
 }

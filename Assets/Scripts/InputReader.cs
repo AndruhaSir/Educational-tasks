@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour
 {
+    public event Action InteractionButtonPressed;
+
     public float XKeyboardAxis { get; private set; }
     public float YKeyboardAxis { get; private set; }
     public Vector2 MouseDelta { get; private set; }
-
-    public event Action InteractionButtonPressed;
 
     private void Update()
     {

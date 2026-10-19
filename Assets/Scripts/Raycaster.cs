@@ -11,27 +11,24 @@ public class Raycaster : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_inputReader != null)
-        {
-            _inputReader.InteractionButtonPressed += HandleInteraction;
-        }
+        _inputReader.InteractionButtonPressed += OnInteractionButtonPressed;
     }
 
     private void OnDisable()
     {
-        if (_inputReader != null)
+        _inputReader.InteractionButtonPressed -= OnInteractionButtonPressed;
+    }
+
+    private void OnValidate()
+    {
+        if (_inputReader == null || _camera == null)
         {
-            _inputReader.InteractionButtonPressed -= HandleInteraction;
+            Debug.LogError("Не все компоненты назначены", this);
         }
     }
 
-    private void HandleInteraction()
+    private void OnInteractionButtonPressed()
     {
-        if (_camera == null)
-        {
-            return;
-        }
-
         Ray ray = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         if (!Physics.Raycast(ray, out RaycastHit hit, _maxDistance))

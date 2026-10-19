@@ -13,14 +13,34 @@ public class Exploder : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            Rigidbody rb = collider.attachedRigidbody;
+            Rigidbody rigidbody = collider.attachedRigidbody;
 
-            if (rb == null || rb.isKinematic || !rigidbodies.Add(rb))
+            if (rigidbody == null || rigidbody.isKinematic || !rigidbodies.Add(rigidbody))
             {
                 continue;
             }
 
-            rb.AddExplosionForce(_explosionForce, position, _explosionRadius, 0f, ForceMode.Impulse);
+            rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius, 0f, ForceMode.Impulse);
+        }
+    }
+
+    public void Explode(Vector3 position, List<GameObject> gameObjects)
+    {
+        foreach (GameObject gameObject in gameObjects)
+        {
+            if (gameObject == null)
+            {
+                continue;
+            }
+
+            Rigidbody rigidbodyComponent = gameObject.GetComponent<Rigidbody>();
+
+            if (rigidbodyComponent == null || rigidbodyComponent.isKinematic)
+            {
+                continue;
+            }
+
+            rigidbodyComponent.AddExplosionForce(_explosionForce, position, _explosionRadius, 0f, ForceMode.Impulse);
         }
     }
 }
