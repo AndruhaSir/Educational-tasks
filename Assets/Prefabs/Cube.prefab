@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 2777414591126594435}
   - component: {fileID: 546320146023144504}
   - component: {fileID: 4751444677305822212}
-  - component: {fileID: 2366045152807141689}
-  - component: {fileID: 7427833727149093685}
+  - component: {fileID: 3632173954224768154}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -142,7 +141,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &2366045152807141689
+--- !u!114 &3632173954224768154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,23 +152,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1272d3a0b13201449a0adeead600a531, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CubeController
+  m_EditorClassIdentifier: Assembly-CSharp::Cube
   _splitChance: 100
-  _minSplitCount: 2
-  _maxSplitCount: 6
-  _cubeSpawner: {fileID: 7427833727149093685}
-  _explosionForce: 10
-  _explosionRadius: 10
---- !u!114 &7427833727149093685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8648434174368761475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e98043f5f579f84c8fd24beec140fd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CubeSpawner
-  _cubePrefab: {fileID: 2366045152807141689}
